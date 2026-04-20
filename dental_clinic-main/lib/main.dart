@@ -23,11 +23,11 @@ class MyApp extends StatelessWidget {
       title: 'DocLine',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.dark(),
-      home: const OnboardingPage(),
+      // غيري هذا السطر ليرجع يفتح أول صفحة في التطبيق
+      home: const OnboardingPage(), 
     );
   }
 }
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 

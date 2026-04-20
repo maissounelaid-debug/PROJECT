@@ -14,7 +14,17 @@ class AppColors {
   static const Color text      = Color(0xFFEAF2FF);
   static const Color textMuted = Color(0xFFA7B4D3);
   static const Color stroke    = Color(0xFF1A2A44);
+  
+static const Color bgDark1 = Color(0xFF060E1E);
+static const Color bgDark2 = Color(0xFF0A1628);
+static const Color warning = Color(0xFFF4A261);
+static const Color danger  = Color(0xFFFF4D6A);
 
+static const LinearGradient heroGradient = LinearGradient(
+  colors: [Color(0xFF021B3A), Color(0xFF041228)],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
   static const LinearGradient bgGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,

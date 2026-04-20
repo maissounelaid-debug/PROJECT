@@ -1,49 +1,55 @@
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart';
 
-class DoctorHome extends StatelessWidget {
+// --- استدعاء الملفات ---
+import 'dashboard_screen.dart';
+import 'patient_screen.dart'; 
+import 'appointment_screen.dart'; 
+import 'profile_screen.dart';
+
+class DoctorHome extends StatefulWidget {
   const DoctorHome({super.key});
+
+  @override
+  State<DoctorHome> createState() => _DoctorHomeState();
+}
+
+class _DoctorHomeState extends State<DoctorHome> {
+  int _currentIndex = 0;
+
+  // القائمة النهائية للشاشات - تأكدي أن الأسماء تطابق الـ Class داخل كل ملف
+  final List<Widget> _screens = [
+    const DashboardScreen(),   
+    const PatientListScreen(), // تأكدي أن هذا الاسم موجود في ملف patient_screen.dart
+    const AppointmentScreen(), // تأكدي أن هذا الاسم موجود في ملف appointment_screen.dart
+    const ProfileScreen(),     
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(gradient: AppColors.bgGradient),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Doctor',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
-                ),
-                const SizedBox(height: 6),
-                const Text(
-                  'Dashboard (coming next)',
-                  style: TextStyle(color: AppColors.textMuted),
-                ),
-                const SizedBox(height: 24),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: AppColors.panel.withValues(alpha: 0.9),
-                    borderRadius: BorderRadius.circular(18),
-                    border: Border.all(
-                        color: AppColors.neonCyan.withValues(alpha: 0.4), width: 1),
-                  ),
-                  child: const Text(
-                    'هنا سنضيف: قائمة المرضى + طلبات المواعيد (قبول/رفض) + dossier medical.',
-                    style: TextStyle(height: 1.35),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+      backgroundColor: const Color(0xFF0F172A), 
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _screens,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        backgroundColor: const Color(0xFF1E293B),
+        selectedItemColor: const Color(0xFF22D3EE),
+        unselectedItemColor: Colors.white24,
+        type: BottomNavigationBarType.fixed,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.grid_view_rounded), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.people_alt_rounded), label: 'Patients'),
+          BottomNavigationBarItem(icon: Icon(Icons.calendar_today_rounded), label: 'Schedule'),
+          BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: 'Profile'),
+        ],
       ),
     );
   }
 }
-
